@@ -43,6 +43,7 @@ var defaultProps = {
     edgeEvent: null,
     init: null,
     swipeEvent: null,
+    showCounter: false,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
     prevArrow: null

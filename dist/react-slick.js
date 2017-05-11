@@ -482,7 +482,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	      }
 	    }
-
+	    var counter = _react2.default.createElement(
+	      'span',
+	      { style: counterStyle },
+	      trackProps.currentSlide + 1,
+	      ' de ',
+	      trackProps.slideCount || 0,
+	      ' fotos'
+	    );
 	    var listStyle = (0, _objectAssign2.default)({}, verticalHeightStyle, centerPaddingStyle);
 
 	    return _react2.default.createElement(
@@ -509,14 +516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onTouchEnd: this.swipeEnd,
 	          onTouchCancel: this.state.dragging ? this.swipeEnd : null,
 	          onKeyDown: this.props.accessibility ? this.keyHandler : null },
-	        _react2.default.createElement(
-	          'span',
-	          { style: counterStyle },
-	          trackProps.currentSlide,
-	          ' de ',
-	          trackProps.slideCount || 0,
-	          ' fotos'
-	        ),
+	        this.props.showCounter ? counter : '',
 	        _react2.default.createElement(
 	          _track.Track,
 	          _extends({ ref: this.trackRefHandler }, trackProps),
@@ -1623,6 +1623,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    edgeEvent: null,
 	    init: null,
 	    swipeEvent: null,
+	    showCounter: false,
 	    // nextArrow, prevArrow are react componets
 	    nextArrow: null,
 	    prevArrow: null
