@@ -232,7 +232,7 @@ export var InnerSlider = createReactClass({
           onTouchCancel={this.state.dragging ? this.swipeEnd: null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
           <span className="slideCount">
-            {this.props.currentSlide} de {this.props.children.length} fotos
+            {this.props.currentSlide} de {this.props.totalSlides || 0} fotos
           </span>
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
