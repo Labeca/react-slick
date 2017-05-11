@@ -413,6 +413,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      variableWidth: this.props.variableWidth
 	    };
 
+	    var counterStyle = {
+	      position: 'absolute',
+	      color: '#FFF',
+	      zIndex: '10',
+	      right: '10px',
+	      bottom: '130px',
+	      textShadow: '1px 2px 2px #000'
+	    };
+
 	    var dots;
 
 	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
@@ -461,13 +470,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.vertical === false) {
 	      if (this.props.centerMode === true) {
 	        centerPaddingStyle = {
-	          padding: '0px ' + this.props.centerPadding
+	          padding: '0px ' + this.props.centerPadding,
+	          position: 'relative'
 	        };
 	      }
 	    } else {
 	      if (this.props.centerMode === true) {
 	        centerPaddingStyle = {
-	          padding: this.props.centerPadding + ' 0px'
+	          padding: this.props.centerPadding + ' 0px',
+	          position: 'relative'
 	        };
 	      }
 	    }
@@ -500,10 +511,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onKeyDown: this.props.accessibility ? this.keyHandler : null },
 	        _react2.default.createElement(
 	          'span',
-	          { className: 'slideCount' },
-	          this.props.currentSlide,
+	          { style: counterStyle },
+	          trackProps.currentSlide,
 	          ' de ',
-	          this.props.totalSlides || 0,
+	          trackProps.slideCount || 0,
 	          ' fotos'
 	        ),
 	        _react2.default.createElement(
