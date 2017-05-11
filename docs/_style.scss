@@ -57,7 +57,7 @@ h3 {
     }
     &.slick-active {
       img {
-        filter: grayscale(0%);        
+        filter: grayscale(0%);
       }
     }
   }
@@ -88,4 +88,18 @@ h3 {
 // explicitly in CSS or otherwise
 .slick-vertical .slick-slide {
   height: 180px;
+}
+
+/**
+  Custom style
+  labeca
+**/
+
+.slideCount {
+  position: absolute;
+  color: #FFF;
+  z-index: 10;
+  right: 10px;
+  bottom: 130px;
+  text-shadow: 1px 2px 2px #000;
 }

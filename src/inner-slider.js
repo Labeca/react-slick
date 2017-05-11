@@ -209,7 +209,11 @@ export var InnerSlider = createReactClass({
     }
 
     const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
-
+    const slideCount = (
+      <span className="slideCount">
+        {this.props.currentSlide} de {this.props.children.length} fotos
+      </span>
+    )
     return (
       <div
         className={className}
@@ -231,6 +235,7 @@ export var InnerSlider = createReactClass({
           onTouchEnd={this.swipeEnd}
           onTouchCancel={this.state.dragging ? this.swipeEnd: null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
+          {slideCount}
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
           </Track>
