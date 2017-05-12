@@ -231,6 +231,7 @@ export var InnerSlider = createReactClass({
         onMouseEnter={this.onInnerSliderEnter}
         onMouseLeave={this.onInnerSliderLeave}
         onMouseOver={this.onInnerSliderOver}
+        onKeyDown={this.props.accessibility ? this.keyHandler : null}
       >
         {prevArrow}
         <div
@@ -245,7 +246,7 @@ export var InnerSlider = createReactClass({
           onTouchMove={this.state.dragging ? this.swipeMove: null}
           onTouchEnd={this.swipeEnd}
           onTouchCancel={this.state.dragging ? this.swipeEnd: null}
-          onKeyDown={this.props.accessibility ? this.keyHandler : null}>
+        >
           {this.props.showCounter ? counter : ''}
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}

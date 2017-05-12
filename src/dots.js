@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
 var getDotCount = function (spec) {
@@ -9,6 +10,24 @@ var getDotCount = function (spec) {
   return dots;
 };
 
+const animatedScrool = (nodeToAnimate, scrollX, direction) => {
+  const currentScroll = nodeToAnimate.scrollLeft
+  let qtdToScroll = (currentScroll - scrollX) / 13
+  qtdToScroll = qtdToScroll < 0 ? qtdToScroll * -1 : qtdToScroll
+  const animate = setInterval(() => {
+    if(direction) {
+      nodeToAnimate.scrollLeft += qtdToScroll
+      if(nodeToAnimate.scrollLeft >= scrollX){
+        clearTimeout(animate)
+      }
+    } else {
+      nodeToAnimate.scrollLeft -= qtdToScroll
+      if(nodeToAnimate.scrollLeft <= scrollX){
+        clearTimeout(animate)
+      }
+    }
+  }, 13)
+}
 
 export class Dots extends React.Component {
   clickHandler(options, e) {
@@ -16,6 +35,14 @@ export class Dots extends React.Component {
     // to next slide. That only goes away by click somewhere outside
     e.preventDefault();
     this.props.clickHandler(options);
+  }
+  componentDidUpdate() {
+    const thumbActive = ReactDOM.findDOMNode(this).getElementsByClassName('slick-active')[0]
+    if((thumbActive.offsetLeft + thumbActive.clientWidth) > (thumbActive.offsetParent.clientWidth + thumbActive.parentElement.scrollLeft)){
+      animatedScrool(ReactDOM.findDOMNode(this), (thumbActive.offsetLeft + thumbActive.clientWidth) - thumbActive.offsetParent.clientWidth, true)
+    } else if (thumbActive.offsetLeft < thumbActive.parentElement.scrollLeft) {
+      animatedScrool(ReactDOM.findDOMNode(this), thumbActive.offsetLeft, false)
+    }
   }
   render() {
 

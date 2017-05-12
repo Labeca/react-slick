@@ -498,7 +498,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        className: className,
 	        onMouseEnter: this.onInnerSliderEnter,
 	        onMouseLeave: this.onInnerSliderLeave,
-	        onMouseOver: this.onInnerSliderOver
+	        onMouseOver: this.onInnerSliderOver,
+	        onKeyDown: this.props.accessibility ? this.keyHandler : null
 	      },
 	      prevArrow,
 	      _react2.default.createElement(
@@ -514,8 +515,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onTouchStart: this.swipeStart,
 	          onTouchMove: this.state.dragging ? this.swipeMove : null,
 	          onTouchEnd: this.swipeEnd,
-	          onTouchCancel: this.state.dragging ? this.swipeEnd : null,
-	          onKeyDown: this.props.accessibility ? this.keyHandler : null },
+	          onTouchCancel: this.state.dragging ? this.swipeEnd : null
+	        },
 	        this.props.showCounter ? counter : '',
 	        _react2.default.createElement(
 	          _track.Track,
@@ -2838,6 +2839,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(6);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _classnames = __webpack_require__(17);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
@@ -2856,6 +2861,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return dots;
 	};
 
+	var animatedScrool = function animatedScrool(nodeToAnimate, scrollX, direction) {
+	  var currentScroll = nodeToAnimate.scrollLeft;
+	  var qtdToScroll = (currentScroll - scrollX) / 13;
+	  qtdToScroll = qtdToScroll < 0 ? qtdToScroll * -1 : qtdToScroll;
+	  var animate = setInterval(function () {
+	    if (direction) {
+	      nodeToAnimate.scrollLeft += qtdToScroll;
+	      if (nodeToAnimate.scrollLeft >= scrollX) {
+	        clearTimeout(animate);
+	      }
+	    } else {
+	      nodeToAnimate.scrollLeft -= qtdToScroll;
+	      if (nodeToAnimate.scrollLeft <= scrollX) {
+	        clearTimeout(animate);
+	      }
+	    }
+	  }, 13);
+	};
+
 	var Dots = exports.Dots = function (_React$Component) {
 	  _inherits(Dots, _React$Component);
 
@@ -2870,6 +2894,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // to next slide. That only goes away by click somewhere outside
 	    e.preventDefault();
 	    this.props.clickHandler(options);
+	  };
+
+	  Dots.prototype.componentDidUpdate = function componentDidUpdate() {
+	    var thumbActive = _reactDom2.default.findDOMNode(this).getElementsByClassName('slick-active')[0];
+	    if (thumbActive.offsetLeft + thumbActive.clientWidth > thumbActive.offsetParent.clientWidth + thumbActive.parentElement.scrollLeft) {
+	      animatedScrool(_reactDom2.default.findDOMNode(this), thumbActive.offsetLeft + thumbActive.clientWidth - thumbActive.offsetParent.clientWidth, true);
+	    } else if (thumbActive.offsetLeft < thumbActive.parentElement.scrollLeft) {
+	      animatedScrool(_reactDom2.default.findDOMNode(this), thumbActive.offsetLeft, false);
+	    }
 	  };
 
 	  Dots.prototype.render = function render() {
