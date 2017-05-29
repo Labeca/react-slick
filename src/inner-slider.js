@@ -62,8 +62,10 @@ export var InnerSlider = createReactClass({
     }
     if (window.addEventListener) {
       window.addEventListener('resize', this.onWindowResized);
+      window.addEventListener('keydown', this.keyHandler, true);
     } else {
       window.attachEvent('onresize', this.onWindowResized);
+      window.attachEvent('onkeydown', this.keyHandler);
     }
   },
   componentWillUnmount: function componentWillUnmount() {
@@ -72,8 +74,10 @@ export var InnerSlider = createReactClass({
     }
     if (window.addEventListener) {
       window.removeEventListener('resize', this.onWindowResized);
+      window.removeEventListener('keydown', this.keyHandler, true);
     } else {
       window.detachEvent('onresize', this.onWindowResized);
+      window.detachEvent('onkeydown', this.keyHandler);
     }
     if (this.state.autoPlayTimer) {
       clearInterval(this.state.autoPlayTimer);
@@ -231,7 +235,6 @@ export var InnerSlider = createReactClass({
         onMouseEnter={this.onInnerSliderEnter}
         onMouseLeave={this.onInnerSliderLeave}
         onMouseOver={this.onInnerSliderOver}
-        onKeyDown={this.props.accessibility ? this.keyHandler : null}
       >
         {prevArrow}
         <div
