@@ -158,7 +158,7 @@ export var InnerSlider = createReactClass({
       color: '#FFF',
       zIndex: '10',
       right: '10px',
-      bottom: '130px',
+      bottom: '10px',
       textShadow: '1px 2px 2px #000'
     }
 
@@ -227,7 +227,7 @@ export var InnerSlider = createReactClass({
         {trackProps.currentSlide + 1} de {trackProps.slideCount || 0} fotos
       </span>
     )
-    const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
+    const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle,{position: 'relative'});
 
     return (
       <div
