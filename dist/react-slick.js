@@ -422,7 +422,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      color: '#FFF',
 	      zIndex: '10',
 	      right: '10px',
-	      bottom: '130px',
+	      bottom: '10px',
 	      textShadow: '1px 2px 2px #000'
 	    };
 
@@ -494,7 +494,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      trackProps.slideCount || 0,
 	      ' fotos'
 	    );
-	    var listStyle = (0, _objectAssign2.default)({}, verticalHeightStyle, centerPaddingStyle);
+	    var listStyle = (0, _objectAssign2.default)({}, verticalHeightStyle, centerPaddingStyle, { position: 'relative' });
 
 	    return _react2.default.createElement(
 	      'div',
