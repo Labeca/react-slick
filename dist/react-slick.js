@@ -428,7 +428,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var dots;
 
-	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
+	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow && this.props.maxDots && Math.ceil(this.state.slideCount / this.props.slidesToScroll) < this.props.maxDots) {
 	      var dotProps = {
 	        dotsClass: this.props.dotsClass,
 	        slideCount: this.state.slideCount,
@@ -441,6 +441,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 
 	      dots = _react2.default.createElement(_dots.Dots, dotProps);
+	    } else if (this.props.maxDots && Math.ceil(this.state.slideCount / this.props.slidesToScroll) > this.props.maxDots) {
+	      dots = _react2.default.createElement(
+	        'div',
+	        { className: this.props.counterStyle },
+	        trackProps.currentSlide + 1,
+	        ' de ',
+	        trackProps.slideCount || 0,
+	        ' fotos'
+	      );
 	    }
 
 	    var prevArrow, nextArrow;
@@ -1533,12 +1542,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    direction: 1,
 	    listWidth: null,
 	    listHeight: null,
-	    // loadIndex: 0,
 	    slideCount: null,
 	    slideWidth: null,
 	    slideHeight: null,
-	    // sliding: false,
-	    // slideOffset: 0,
 	    swipeLeft: null,
 	    touchObject: {
 	        startX: 0,
@@ -1546,24 +1552,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        curX: 0,
 	        curY: 0
 	    },
-
 	    lazyLoadedList: [],
-
 	    // added for react
 	    initialized: false,
 	    edgeDragged: false,
 	    swiped: false, // used by swipeEvent. differentites between touch and swipe.
 	    trackStyle: {},
 	    trackWidth: 0
-
-	    // Removed
-	    // transformsEnabled: false,
-	    // $nextArrow: null,
-	    // $prevArrow: null,
-	    // $dots: null,
-	    // $list: null,
-	    // $slideTrack: null,
-	    // $slides: null,
 	};
 
 	module.exports = initialState;
@@ -1628,7 +1623,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    init: null,
 	    swipeEvent: null,
 	    showCounter: false,
-	    // nextArrow, prevArrow are react componets
+	    maxDots: undefined,
+	    counterStyle: '', // nextArrow, prevArrow are react componets
 	    nextArrow: null,
 	    prevArrow: null
 	};
@@ -2916,9 +2912,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slidesToScroll: this.props.slidesToScroll
 	    });
 
+	    // console.log(dotCount)
+	    // if(dotCount > 7) {
+	    //   return (<span></span>)
+	    // }
 	    // Apply join & split to Array to pre-fill it for IE8
 	    //
 	    // Credit: http://stackoverflow.com/a/13735425/1849458
+
 	    var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map(function (x, i) {
 
 	      var leftBound = i * _this2.props.slidesToScroll;
@@ -2935,14 +2936,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 
 	      var onClick = _this2.clickHandler.bind(_this2, dotOptions);
-
+	      if (_this2.props.customPaging.type === 'span') {
+	        return null;
+	      }
 	      return _react2.default.createElement(
 	        'li',
 	        { key: i, className: className },
 	        _react2.default.cloneElement(_this2.props.customPaging(i), { onClick: onClick })
 	      );
 	    });
-
 	    return _react2.default.createElement(
 	      'ul',
 	      { className: this.props.dotsClass, style: { display: 'block' } },

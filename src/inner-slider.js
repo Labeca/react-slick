@@ -164,7 +164,8 @@ export var InnerSlider = createReactClass({
 
     var dots;
 
-    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
+    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow
+      && (this.props.maxDots && Math.ceil(this.state.slideCount / this.props.slidesToScroll) < this.props.maxDots)) {
       var dotProps = {
         dotsClass: this.props.dotsClass,
         slideCount: this.state.slideCount,
@@ -177,6 +178,12 @@ export var InnerSlider = createReactClass({
       };
 
       dots = (<Dots {...dotProps} />);
+    } else if(this.props.maxDots && Math.ceil(this.state.slideCount / this.props.slidesToScroll) > this.props.maxDots) {
+      dots = (
+        <div className={this.props.counterStyle}>
+          {trackProps.currentSlide + 1} de {trackProps.slideCount || 0} fotos
+        </div>
+      )
     }
 
     var prevArrow, nextArrow;

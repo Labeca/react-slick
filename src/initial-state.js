@@ -8,12 +8,9 @@ var initialState = {
     direction: 1,
     listWidth: null,
     listHeight: null,
-    // loadIndex: 0,
     slideCount: null,
     slideWidth: null,
     slideHeight: null,
-    // sliding: false,
-    // slideOffset: 0,
     swipeLeft: null,
     touchObject: {
       startX: 0,
@@ -21,24 +18,13 @@ var initialState = {
       curX: 0,
       curY: 0
     },
-
     lazyLoadedList: [],
-
     // added for react
     initialized: false,
     edgeDragged: false,
     swiped: false, // used by swipeEvent. differentites between touch and swipe.
     trackStyle: {},
-    trackWidth: 0
-
-    // Removed
-    // transformsEnabled: false,
-    // $nextArrow: null,
-    // $prevArrow: null,
-    // $dots: null,
-    // $list: null,
-    // $slideTrack: null,
-    // $slides: null,
+    trackWidth: 0,
 };
 
 module.exports = initialState;

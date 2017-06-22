@@ -51,9 +51,14 @@ export class Dots extends React.Component {
       slidesToScroll: this.props.slidesToScroll
     });
 
+    // console.log(dotCount)
+    // if(dotCount > 7) {
+    //   return (<span></span>)
+    // }
     // Apply join & split to Array to pre-fill it for IE8
     //
     // Credit: http://stackoverflow.com/a/13735425/1849458
+  
     var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map((x, i) => {
 
       var leftBound = (i * this.props.slidesToScroll);
@@ -70,14 +75,13 @@ export class Dots extends React.Component {
       };
 
       var onClick = this.clickHandler.bind(this, dotOptions);
-
+      if(this.props.customPaging.type === 'span') { return null}
       return (
         <li key={i} className={className}>
           {React.cloneElement(this.props.customPaging(i), {onClick})}
         </li>
       );
     });
-
     return (
       <ul className={this.props.dotsClass} style={{display: 'block'}}>
         {dots}

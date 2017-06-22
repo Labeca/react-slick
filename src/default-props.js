@@ -44,7 +44,8 @@ var defaultProps = {
     init: null,
     swipeEvent: null,
     showCounter: false,
-    // nextArrow, prevArrow are react componets
+    maxDots: undefined,
+    counterStyle: '',    // nextArrow, prevArrow are react componets
     nextArrow: null,
     prevArrow: null
 };
