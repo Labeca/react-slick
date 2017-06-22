@@ -428,7 +428,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var dots;
 
-	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow && this.props.maxDots && Math.ceil(this.state.slideCount / this.props.slidesToScroll) < this.props.maxDots) {
+	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow && Math.ceil(this.state.slideCount / this.props.slidesToScroll) < this.props.maxDots) {
 	      var dotProps = {
 	        dotsClass: this.props.dotsClass,
 	        slideCount: this.state.slideCount,
@@ -441,7 +441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 
 	      dots = _react2.default.createElement(_dots.Dots, dotProps);
-	    } else if (this.props.maxDots && Math.ceil(this.state.slideCount / this.props.slidesToScroll) > this.props.maxDots) {
+	    } else if (Math.ceil(this.state.slideCount / this.props.slidesToScroll) > this.props.maxDots) {
 	      dots = _react2.default.createElement(
 	        'div',
 	        { className: this.props.counterStyle },
@@ -1623,7 +1623,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    init: null,
 	    swipeEvent: null,
 	    showCounter: false,
-	    maxDots: undefined,
+	    maxDots: 10000,
 	    counterStyle: '', // nextArrow, prevArrow are react componets
 	    nextArrow: null,
 	    prevArrow: null
